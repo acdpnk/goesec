@@ -29,7 +29,7 @@ def decrypt(key, ciphertext):
         # get the key_symbol's index in the alphabet
         key_symbol_index = ascii_lowercase.index(key_symbol)
 
-        # decrypt the cipher symbol
+        # decrypt the cipher symbol and append to out
         out += ascii_lowercase[(symbol_index + key_symbol_index + 1) % len(ascii_lowercase)]
 
     # print(out)
@@ -78,7 +78,9 @@ def guess_key(keylen, depth, ciphertext):
     # indexlist.sort(key = lambda x: reduce(lambda y,z: y+z, x))
     # commented out because probably useless
 
-    
+    # this is how you get back from a symbol and a suspected letter to the corresponding key symbol
+    # it's here so I can use it later.
+    # ascii_lowercase[(ascii_lowercase.index(symbol) - ascii_lowercase.index(letter) + 25) % 26]
 
     print(symbol_map)
     print(frequency_map)
