@@ -33,11 +33,6 @@ def decrypt(key, ciphertext):
     # print(out)
     return out
 
-def hist(keylen, ciphertext):
-    # generate a simple histogram of the symbols in ciphertext encryptet with
-    # key of length keylen by way of a Vigenre cipher
-    pass
-
 def plausibility_check(message_candidate):
     # computes a relative score for the likelihood of message_candidate beeing
     # a text in the english language (that is, the correct decrypted message)
