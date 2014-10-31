@@ -40,13 +40,14 @@ def plausibility_check(message_candidate):
     # a text in the english language (that is, the correct decrypted message)
     score = 0
     with open('google-10000-english/google-10000-english.txt') as dictionary:
-        iterations = 1000
+        iterations = 10000
         i = 0
         for word in dictionary.readlines():
-            if message_candidate.lower().find(word.lower().strip()) > -1:
-                # if message_candidate contains the word once or more
-                # print(word.strip())
-                if len(word) >= 2:
+            if len(word.strip()) > 4:
+                if message_candidate.lower().find(word.lower().strip()) > -1:
+                    # if message_candidate contains the word once or more
+                    # print(word.strip())
+
                     score += 1
             i += 1
             if i > iterations:
@@ -92,9 +93,6 @@ def guess_key(keylen, depth, ciphertext):
             key_candidate += get_key_symbol(frequency_map[i][index_tuple[i]], frequent_letters[index_tuple[i]])
 
         yield key_candidate
-    # this is how you get back from a symbol and a suspected letter to the corresponding key symbol
-    # it's here so I can use it later.
-    # ascii_lowercase[(ascii_lowercase.index(symbol) - ascii_lowercase.index(letter) + 25) % 26]
 
     # print(symbol_map)
     # print(frequency_map)
@@ -104,7 +102,7 @@ def get_key_symbol(cipher_symbol, plaintext_symbol):
 
 max_score = 0
 message = ""
-for key_candidate in guess_key(5,3,crypt):
+for key_candidate in guess_key(5,7,crypt):
     key_candidate = ''.join(key_candidate)
     # print(key_candidate)
     message_candidate = decrypt(key_candidate, crypt)
