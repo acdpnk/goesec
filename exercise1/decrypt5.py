@@ -43,7 +43,7 @@ def plausibility_check(message_candidate):
         iterations = 10000
         i = 0
         for word in dictionary.readlines():
-            if len(word.strip()) > 4:
+            if len(word.strip()) > 3:
                 if message_candidate.lower().find(word.lower().strip()) > -1:
                     # if message_candidate contains the word once or more
                     # print(word.strip())
