@@ -30,7 +30,7 @@ def decrypt(key, ciphertext):
         key_symbol_index = ascii_lowercase.index(key_symbol)
 
         # decrypt the cipher symbol and append to out
-        out += ascii_lowercase[(symbol_index - key_symbol_index + 25) % len(ascii_lowercase)]
+        out += ascii_lowercase[(symbol_index - key_symbol_index + 26) % len(ascii_lowercase)]
 
     # print(out)
     return out
@@ -81,8 +81,8 @@ def guess_key(keylen, depth, ciphertext):
     # when we use the resulting list to generate our list of key candidates,
     # they will be ordered by likelihood of them being the correct key
     # actually, this is probably not needed. what the fuck.
-    indices = product(range(depth), repeat=keylen)
-    # indices.sort(key = lambda x: reduce(lambda y,z: y+z, x))
+    indices = list(product(range(depth), repeat=keylen))
+    indices.sort(key = lambda x: reduce(lambda y,z: y+z, x))
     # commented out because probably useless
 
     for index_tuple in indices:
@@ -98,11 +98,11 @@ def guess_key(keylen, depth, ciphertext):
     # print(frequency_map)
 
 def get_key_symbol(cipher_symbol, plaintext_symbol):
-    return ascii_lowercase[(ascii_lowercase.index(cipher_symbol) - ascii_lowercase.index(plaintext_symbol) + 25) % 26]
+    return ascii_lowercase[(ascii_lowercase.index(cipher_symbol) - ascii_lowercase.index(plaintext_symbol) + 26) % 26]
 
 max_score = 0
 message = ""
-for key_candidate in guess_key(5,7,crypt):
+for key_candidate in guess_key(5,26,crypt):
     key_candidate = ''.join(key_candidate)
     # print(key_candidate)
     message_candidate = decrypt(key_candidate, crypt)
