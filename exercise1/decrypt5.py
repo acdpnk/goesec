@@ -1,6 +1,7 @@
 from string import ascii_lowercase
 from itertools import product
 from functools import reduce
+from math import sqrt
 
 crypt_path = "crypt5.txt"
 crypt = ""
@@ -35,83 +36,94 @@ def decrypt(key, ciphertext):
     # print(out)
     return out
 
-def plausibility_check(message_candidate):
-    # computes a relative score for the likelihood of message_candidate being
-    # a text in the english language (that is, the correct decrypted message)
-    score = 0
-    with open('google-10000-english/google-10000-english.txt') as dictionary:
-        iterations = 10000
-        i = 0
-        for word in dictionary.readlines():
-            if len(word.strip()) > 3:
-                if message_candidate.lower().find(word.lower().strip()) > -1:
-                    # if message_candidate contains the word once or more
-                    # print(word.strip())
+def rotate(text):
+    return text[1:] + text[0]
 
-                    score += 1
-            i += 1
-            if i > iterations:
-                break
-    # print(score)
-    return score
+def guess_key(keylen, ciphertext):
+    key = ''
+    for i in range(keylen):
+        best = ''
+        best_error = -1
+        for char in ascii_lowercase:
+            error = calculate_key_error(frequency_fingerprint(keylen, decrypt(char, ciphertext))[i])
+            if best_error == -1 or error < best_error:
+                best_error = error
+                best = char
+            print("%s %s" % (char, error))
+        key += best
+    return key
 
-def guess_key(keylen, depth, ciphertext):
 
-    # first, we create a symbol map: a list of symbols for each part of the key
-    # that symbol was encrypted with, and from that a frequency map: the
-    # ascii letters sorted by frequency in their respective lists
+
+def frequency_fingerprint(keylen, text):
     symbol_map = ['' for i in range(keylen)]
-    frequency_map = ['' for i in range(keylen)]
-    for i in range(len(ciphertext)):
-        symbol_map[i % keylen] += ciphertext[i]
+    frequency_map = [{} for i in range(keylen)]
+    for i in range(len(text)):
+        symbol_map[i % keylen] += text[i]
     for i in range(len(symbol_map)):
-        frequency_map[i] = sorted(ascii_lowercase, key=lambda symbol: symbol_map[i].find(symbol), reverse=True)
+        for char in ascii_lowercase:
+            freq = max(0, symbol_map[i].find(char))
+            frequency_map[i][char] = freq
 
+        frequency_map[i] = scale_dict(frequency_map[i], 12.702)
+    return frequency_map
+
+
+def calculate_key_error(decrypted_dict):
     # lowercase ascii letters, sorted by relative frequency in the english
     # language. See https://en.wikipedia.org/wiki/Letter_frequency
-    frequent_letters = 'etaonrishdlfcmugypwbvkjxqz'
+    # frequent_letters = 'etaonrishdlfcmugypwbvkjxqz'
+    frequent_letters = {
+        'a': 8.167,
+        'b': 1.492,
+        'c': 2.782,
+        'd': 4.253,
+        'e': 12.702,
+        'f': 2.228,
+        'g': 2.015,
+        'h': 6.094,
+        'i': 6.966,
+        'j': 0.153,
+        'k': 0.772,
+        'l': 4.025,
+        'm': 2.406,
+        'n': 6.749,
+        'o': 7.507,
+        'p': 1.929,
+        'q': 0.095,
+        'r': 5.987,
+        's': 6.327,
+        't': 9.056,
+        'u': 2.758,
+        'v': 0.978,
+        'w': 2.360,
+        'x': 0.150,
+        'y': 1.974,
+        'z': 0.074
+    }
+    error = 0
+    for letter in frequent_letters:
+        error += pow(frequent_letters[letter] - decrypted_dict.get(letter, frequent_letters[letter]), 2)
+    return error
 
-    # generate the list of permutations used to iterate over the key candidates
-    # there has to be a better way to do this - if you know it, please tell me
-    # the indices is generated as follows:
-    # 1) we take the nth cartesian product of range(depth), where n = keylen
-    #    that means for our key candidates we take the [depth] most frequent
-    #    letters from each list
-    # 2) we sort the resulting list of tuples be the tuple's digit sum
-    # when we use the resulting list to generate our list of key candidates,
-    # they will be ordered by likelihood of them being the correct key
-    # actually, this is probably not needed. what the fuck.
-    indices = list(product(range(depth), repeat=keylen))
-    indices.sort(key = lambda x: reduce(lambda y,z: y+z, x))
-    # commented out because probably useless
 
-    for index_tuple in indices:
-        # symbols = [frequency_map[i][index_tuple[i]] for i in range(keylen)]
-        # key_candidate = ''.join(symbols.map(lambda x: ))
-        key_candidate = ''
-        for i in range(len(index_tuple)):
-            key_candidate += get_key_symbol(frequency_map[i][index_tuple[i]], frequent_letters[0])
-
-        yield key_candidate
-
-    # print(symbol_map)
-    # print(frequency_map)
+def scale_dict(dictionary, scale_to):
+    vals = list(iter(dictionary.values()))
+    vals = sorted(vals, reverse=True)
+    max_value = vals[0]
+    # print(vals)
+    for (key, value) in dictionary.items():
+        dictionary[key] = value * (scale_to / max_value)
+    # print(dictionary)
+    return dictionary
 
 def get_key_symbol(cipher_symbol, plaintext_symbol):
     return ascii_lowercase[(ascii_lowercase.index(cipher_symbol) - ascii_lowercase.index(plaintext_symbol) + 26) % 26]
 
-max_score = 0
-message = ""
-for key_candidate in guess_key(5,6,crypt):
-    key_candidate = ''.join(key_candidate)
-    # print(key_candidate)
-    message_candidate = decrypt(key_candidate, crypt)
-    # print(message_candidate)
-    score = plausibility_check(message_candidate)
-    if score > max_score:
-        message = message_candidate
-        max_score = score
-        print(score)
-        print(message_candidate)
 
-print("\nmy best guess is:\n%s" % message)
+message = ""
+
+key_candidate = guess_key(5, crypt)
+
+print(key_candidate)
+print(decrypt(key_candidate, crypt))
