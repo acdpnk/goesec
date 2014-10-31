@@ -90,7 +90,7 @@ def guess_key(keylen, depth, ciphertext):
         # key_candidate = ''.join(symbols.map(lambda x: ))
         key_candidate = ''
         for i in range(len(index_tuple)):
-            key_candidate += get_key_symbol(frequency_map[i][index_tuple[i]], frequent_letters[index_tuple[i]])
+            key_candidate += get_key_symbol(frequency_map[i][index_tuple[i]], frequent_letters[0])
 
         yield key_candidate
 
@@ -102,7 +102,7 @@ def get_key_symbol(cipher_symbol, plaintext_symbol):
 
 max_score = 0
 message = ""
-for key_candidate in guess_key(5,26,crypt):
+for key_candidate in guess_key(5,6,crypt):
     key_candidate = ''.join(key_candidate)
     # print(key_candidate)
     message_candidate = decrypt(key_candidate, crypt)
