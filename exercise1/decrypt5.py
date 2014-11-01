@@ -31,7 +31,7 @@ def decrypt(key, ciphertext):
         key_symbol_index = ascii_lowercase.index(key_symbol)
 
         # decrypt the cipher symbol and append to out
-        out += ascii_lowercase[(symbol_index - key_symbol_index + 26) % len(ascii_lowercase)]
+        out += ascii_lowercase[(symbol_index - key_symbol_index + len(ascii_lowercase)) % len(ascii_lowercase)]
 
     # print(out)
     return out
@@ -45,11 +45,11 @@ def guess_key(keylen, ciphertext):
         best = ''
         best_error = -1
         for char in ascii_lowercase:
-            error = calculate_key_error(frequency_fingerprint(keylen, decrypt(char, ciphertext))[i])
-            if best_error == -1 or error < best_error:
-                best_error = error
-                best = char
-            print("%s %s" % (char, error))
+                error = calculate_key_error(frequency_fingerprint(keylen, decrypt(char, ciphertext))[i])
+                if best_error == -1 or error < best_error:
+                    best_error = error
+                    best = char
+        print("%s %s" % (best, best_error))
         key += best
     return key
 
@@ -62,10 +62,11 @@ def frequency_fingerprint(keylen, text):
         symbol_map[i % keylen] += text[i]
     for i in range(len(symbol_map)):
         for char in ascii_lowercase:
-            freq = max(0, symbol_map[i].find(char))
+            freq = max(0, symbol_map[i].count(char))
             frequency_map[i][char] = freq
 
         frequency_map[i] = scale_dict(frequency_map[i], 12.702)
+    # print(frequency_map)
     return frequency_map
 
 
@@ -102,8 +103,8 @@ def calculate_key_error(decrypted_dict):
         'z': 0.074
     }
     error = 0
-    for letter in frequent_letters:
-        error += pow(frequent_letters[letter] - decrypted_dict.get(letter, frequent_letters[letter]), 2)
+    for letter in decrypted_dict:
+        error += pow(frequent_letters[letter] - decrypted_dict.get(letter, 0), 2)
     return error
 
 
@@ -118,7 +119,7 @@ def scale_dict(dictionary, scale_to):
     return dictionary
 
 def get_key_symbol(cipher_symbol, plaintext_symbol):
-    return ascii_lowercase[(ascii_lowercase.index(cipher_symbol) - ascii_lowercase.index(plaintext_symbol) + 26) % 26]
+    return ascii_lowercase[(ascii_lowercase.index(cipher_symbol) - ascii_lowercase.index(plaintext_symbol))  + len(ascii_lowercase) % len(ascii_lowercase)]
 
 
 message = ""
