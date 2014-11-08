@@ -30,3 +30,7 @@ if not (X**y)%n == (Y**x)%n == (g**(x*y))%n:
     sys.exit(1)
 
 print("key:\t%s" % ((X**y)%n) )
+
+
+# Why did I succeed? Because the numbers, especially the n, is very small,
+# making the problem very easy to bruteforce.
