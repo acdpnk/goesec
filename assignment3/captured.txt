@@ -1,102 +1,103 @@
-b'5909\n'
-b'9208\n'
-b'9652\n'
-b'7145\n'
-b'Stop. Who would cross the Bridge of Death must answer me these questions three, ere the other side he see. \n'
-b'Ask me the questions, bridgekeeper. I am not afraid. \n'
-b'4867\n'
-b'4662\n'
-b'9855\n'
-b'0549\n'
-b'What... is your name? \n'
-b'My name is Sir Lancelot of Camelot. \n'
-b'8178\n'
-b'5909\n'
-b'7145\n'
-b'3021\n'
-b'What... is your quest? \n'
-b'To seek the Holy Grail. \n'
-b'7114\n'
-b'0714\n'
-b'5497\n'
-b'7604\n'
-b'What... is your favourite colour? \n'
-b'Blue. \n'
-b'6331\n'
-b'8928\n'
-b'5006\n'
-b'1749\n'
-b'Go on. Off you go. \n'
-b'Oh, thank you. Thank you very much. \n'
-b'2095\n'
-b'9448\n'
-b'0302\n'
-b'6668\n'
-b'Stop. Who would cross the Bridge of Death must answer me these questions three, ere the other side he see. \n'
-b"Ask me the questions, bridgekeeper. I'm not afraid. \n"
-b'9460\n'
-b'1992\n'
-b'2842\n'
-b'0448\n'
-b'What... is your name? \n'
-b'Sir Robin of Camelot. \n'
-b'2800\n'
-b'1983\n'
-b'2817\n'
-b'9113\n'
-b'What... is your quest? \n'
-b'To seek the Holy Grail. \n'
-b'6834\n'
-b'8051\n'
-b'2634\n'
-b'3532\n'
-b'What... is the capital of Assyria? \n'
-b"I don't know that. Auuuuuuuugh. \n"
-b'9949\n'
-b'9044\n'
-b'9114\n'
-b'1601\n'
-b'Stop. What... is your name? \n'
-b'Sir Galahad of Camelot. \n'
-b'2520\n'
-b'6746\n'
-b'2960\n'
-b'8028\n'
-b'What... is your quest? \n'
-b'I seek the Grail. \n'
-b'4488\n'
-b'9626\n'
-b'0858\n'
-b'9347\n'
-b'What... is your favourite colour? \n'
-b'Blue. No, yel... auuuuuuuugh. \n'
-b'7364\n'
-b'7884\n'
-b'0272\n'
-b'8695\n'
-b'Hee hee heh. Stop. What... is your name? \n'
-b"It is 'Arthur', King of the Britons. \n"
-b'2022\n'
-b'2342\n'
-b'7496\n'
-b'6487\n'
-b'What... is your quest? \n'
-b'To seek the Holy Grail. \n'
-b'9820\n'
-b'7668\n'
-b'9260\n'
-b'1176\n'
-b'What... is the air-speed velocity of an unladen swallow? \n'
-b'What do you mean? An African or European swallow? \n'
-b'0635\n'
-b'1240\n'
-b'0664\n'
-b'5250\n'
-b"Huh? I... I don't know that. Auuuuuuuugh. \n"
-b'How do know so much about swallows? \n'
-b'2343\n'
-b'3600\n'
-b'5026\n'
-b'7498\n'
-b"Well, you have to know these things when you're a king, you know.\n"
-b'Uh, a flag: 1a8d5de978d95078187dd58e4ff2b30c254cd1bdf884acd03d3d9324b9074724\n'
+1098
+6066
+0951
+0137
+Stop. Who would cross the Bridge of Death must answer me these questions three, ere the other side he see. 
+Ask me the questions, bridgekeeper. I am not afraid. 
+8886
+0818
+5788
+4859
+What... is your name? 
+My name is Sir Lancelot of Camelot. 
+4753
+8022
+2569
+0445
+What... is your quest? 
+To seek the Holy Grail. 
+0695
+1370
+1054
+5396
+What... is your favourite colour? 
+Blue. 
+0889
+8402
+3647
+6023
+Go on. Off you go. 
+Oh, thank you. Thank you very much. 
+3498
+7467
+8700
+4723
+Stop. Who would cross the Bridge of Death must answer me these questions three, ere the other side he see. 
+Ask me the questions, bridgekeeper. I'm not afraid. 
+3346
+0640
+5253
+3985
+What... is your name? 
+Sir Robin of Camelot. 
+0680
+3897
+5719
+5377
+What... is your quest? 
+To seek the Holy Grail. 
+6364
+5792
+6788
+1858
+What... is the capital of Assyria? 
+I don't know that. Auuuuuuuugh. 
+5084
+5670
+6385
+4978
+Stop. What... is your name? 
+Sir Galahad of Camelot. 
+8706
+4973
+0869
+4650
+What... is your quest? 
+I seek the Grail. 
+7563
+5800
+6818
+8965
+What... is your favourite colour? 
+Blue. No, yel... auuuuuuuugh. 
+4461
+9173
+9562
+9237
+Hee hee heh. Stop. What... is your name? 
+It is 'Arthur', King of the Britons. 
+0899
+6300
+1664
+6054
+What... is your quest? 
+To seek the Holy Grail. 
+8579
+5116
+5030
+4181
+What... is the air-speed velocity of an unladen swallow? 
+What do you mean? An African or European swallow? 
+4463
+0543
+5026
+9241
+Huh? I... I don't know that. Auuuuuuuugh. 
+How do know so much about swallows? 
+0268
+6109
+1068
+4111
+Well, you have to know these things when you're a king, you know.
+Uh, a flag: c51a1ac5730d58407b6682a3e343bd3d05d499d7e59dc95c708386b68ac7743b
+8922
